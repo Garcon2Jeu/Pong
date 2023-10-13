@@ -2,12 +2,16 @@ Class = require "LIBRARIES.class"
 Push = require "LIBRARIES.push"
 
 require "OBJECTS.Paddle"
+require "OBJECTS.Ball"
 
-WINDOW_WIDTH = 1280
-WINDOW_HEIGHT = 720
+WINDOW_WIDTH   = 1280
+WINDOW_HEIGHT  = 720
 
-VIRTUAL_WIDTH = 432
+VIRTUAL_WIDTH  = 432
 VIRTUAL_HEIGHT = 243
+
+CENTER_WIDTH   = VIRTUAL_WIDTH / 2
+CENTER_HEIGHT  = VIRTUAL_HEIGHT / 2
 
 
 App = Class {}
@@ -43,4 +47,16 @@ function App:quit(key)
     if key == "escape" then
         love.event.quit()
     end
+end
+
+function App:hasCollided(object1, object2)
+    if object1.x > object2.x + object2.width or object2.x > object1.x + object1.width then
+        return false
+    end
+
+    if object1.y > object2.y + object2.height or object2.y > object1.y + object1.height then
+        return false
+    end
+
+    return true
 end
