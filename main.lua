@@ -1,11 +1,11 @@
 require "App"
 
 function love.load()
-    app = App(true)
+    app = App()
     gameState = GameState()
 
     paddle1 = Paddle(10, 10, 1)
-    paddle2 = Paddle(VIRTUAL_WIDTH - 10, VIRTUAL_HEIGHT - 30, 2)
+    paddle2 = Paddle(VIRTUAL_WIDTH - 10, VIRTUAL_HEIGHT - 30, "AI")
     ball = Ball()
 end
 
@@ -33,6 +33,8 @@ function love.draw(dt)
     paddle2:draw()
     ball:draw()
 
+    app:drawDevMode()
+
     Push:apply("end")
 end
 
@@ -41,8 +43,3 @@ function love.keypressed(key)
     app:quit(key)
     app:reset(key)
 end
-
--- love.graphics.print(tostring(paddle1.y), 50, 25)
--- love.graphics.print(tostring(paddle1.dy), 50, 50)
-
--- love.graphics.print(tostring(app:hasCollided(paddle1, ball)), 50, 50)

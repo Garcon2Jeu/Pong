@@ -7,6 +7,7 @@ function Ball:init()
     self.dy     = math.random(-50, 50)
     self.width  = 4
     self.height = 4
+    self.speed  = 1
 end
 
 function Ball:update(dt)
@@ -37,7 +38,8 @@ end
 
 function Ball:bounceOffPaddles(offset)
     self.x = offset
-    self.dx = -self.dx * 1.3
+    self.speed = self.speed + .05
+    self.dx = -self.dx * self.speed
     self.dy = self.dy < 0 and
         -math.random(10, 150)
         or
@@ -67,6 +69,7 @@ function Ball:score()
     elseif self.x >= VIRTUAL_WIDTH then
         paddle1.score = paddle1.score + 1
         paddle2.serving = true
+        paddle2.speed = paddle2.speed + 7
         self:reset(-100)
         sounds["score"]:play()
         gameState:setServe()
@@ -74,8 +77,9 @@ function Ball:score()
 end
 
 function Ball:reset(dx)
-    self.x  = CENTER_WIDTH - 2
-    self.y  = CENTER_HEIGHT - 2
-    self.dx = dx
-    self.dy = math.random(-50, 50)
+    self.x     = CENTER_WIDTH - 2
+    self.y     = CENTER_HEIGHT - 2
+    self.dx    = dx
+    self.dy    = math.random(-50, 50)
+    self.speed = 1
 end

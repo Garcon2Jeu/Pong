@@ -9,7 +9,7 @@ function Paddle:init(x, y, player)
     self.player  = player
     self.score   = 0
     self.serving = false
-    self.speed   = 200
+    self.speed   = self.player == "AI" and 50 or 300
 end
 
 function Paddle:update(dt)
@@ -42,6 +42,10 @@ function Paddle:move(dt)
         self.dy = self.dy - self.speed * dt
     end
 
+    if self.player == "AI" and gameState.play then
+        self.dy = self:AI(dt)
+    end
+
     self.y = self.y + self.dy
 end
 
@@ -50,4 +54,11 @@ function Paddle:keepWithinScreen(dt)
         math.max(0, self.y)
         or
         math.min(self.y, VIRTUAL_HEIGHT - self.height)
+end
+
+function Paddle:AI(dt)
+    return self.y + self.height / 2 > ball.y and
+        self.dy - self.speed * dt
+        or
+        self.dy + self.speed * dt
 end

@@ -5,16 +5,16 @@ function GameState:init()
     self.serve        = false
     self.play         = false
     self.over         = false
-    self.winningScore = 2
+    self.winningScore = 10
     self.winner       = null
 end
 
 function GameState:update()
     if paddle1.score == self.winningScore then
-        self.winner = paddle1.player
+        self.winner = "1"
         self:setOver()
     elseif paddle2.score == self.winningScore then
-        self.winner = paddle2.player
+        self.winner = "2"
         self:setOver()
     end
 end

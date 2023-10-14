@@ -67,3 +67,35 @@ function App:hasCollided(object1, object2)
 
     return true
 end
+
+function App:drawDevMode()
+    if not self.dev then
+        return
+    end
+
+    love.graphics.setFont(smallFont)
+    love.graphics.setColor(0, 255, 0, 255)
+
+    love.graphics.print("FPS: " .. tostring(love.timer.getFPS()), 75, 25)
+
+    love.graphics.setColor(255, 255, 0, 255)
+    -- Ball stats
+    love.graphics.printf("ball.x  = " .. tostring(math.floor(ball.x)), CENTER_WIDTH - 25, 50, CENTER_WIDTH + 50, "left")
+    love.graphics.printf("ball.y  = " .. tostring(math.floor(ball.y)), CENTER_WIDTH - 25, 60, CENTER_WIDTH + 50, "left")
+    love.graphics.printf("ball.dx = " .. tostring(math.floor(ball.dx)), CENTER_WIDTH - 25, 70, CENTER_WIDTH + 50, "left")
+    love.graphics.printf("ball.dy = " .. tostring(math.floor(ball.dy)), CENTER_WIDTH - 25, 80, CENTER_WIDTH + 50, "left")
+    love.graphics.printf("ball.speed = " .. tostring(math.floor(ball.speed)), CENTER_WIDTH - 25, 90, CENTER_WIDTH + 50,
+        "left")
+
+    -- Player 1 stats
+    love.graphics.print("P1.x = " .. tostring(math.floor(paddle1.x)), 75, 50)
+    love.graphics.print("P1.y = " .. tostring(math.floor(paddle1.y)), 75, 60)
+    love.graphics.print("P1.dy = " .. tostring(math.floor(paddle1.dy)), 75, 80)
+    love.graphics.print("P1.speed = " .. tostring(math.floor(paddle1.speed)), 75, 90)
+
+    -- Player 2 stats
+    love.graphics.print("P2.x = " .. tostring(math.floor(paddle2.x)), VIRTUAL_WIDTH - 150, 50)
+    love.graphics.print("P2.y = " .. tostring(math.floor(paddle2.y)), VIRTUAL_WIDTH - 150, 60)
+    love.graphics.print("P2.dy = " .. tostring(math.floor(paddle2.dy)), VIRTUAL_WIDTH - 150, 80)
+    love.graphics.print("P2.speed = " .. tostring(math.floor(paddle2.speed)), VIRTUAL_WIDTH - 150, 90)
+end
