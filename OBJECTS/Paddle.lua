@@ -21,6 +21,14 @@ function Paddle:draw()
     love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
 end
 
+function Paddle:drawScore()
+    if self.player == 1 then
+        love.graphics.print(self.score, CENTER_WIDTH - 50, 20)
+    else
+        love.graphics.print(self.score, CENTER_WIDTH + 30, 20)
+    end
+end
+
 function Paddle:move(dt)
     self.dy = 0
 

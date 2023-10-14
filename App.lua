@@ -1,6 +1,7 @@
 Class = require "LIBRARIES.class"
 Push = require "LIBRARIES.push"
 
+require "OBJECTS.GameState"
 require "OBJECTS.Paddle"
 require "OBJECTS.Ball"
 
@@ -30,12 +31,12 @@ function App:init(dev)
     math.randomseed(os.time())
 
     smallFont = love.graphics.newFont("ASSETS/font.ttf", 8)
-    smallFont = love.graphics.newFont("ASSETS/font.ttf", 32)
+    scoreFont = love.graphics.newFont("ASSETS/font.ttf", 32)
 
     sounds = {
         ["paddle_hit"] = love.audio.newSource("ASSETS/SOUNDS/paddle_hit.wav", "static"),
-        ["wall_hit"] = love.audio.newSource("ASSETS/SOUNDS/paddle_hit.wav", "static"),
-        ["score"] = love.audio.newSource("ASSETS/SOUNDS/paddle_hit.wav", "static")
+        ["wall_hit"] = love.audio.newSource("ASSETS/SOUNDS/wall_hit.wav", "static"),
+        ["score"] = love.audio.newSource("ASSETS/SOUNDS/score.wav", "static")
     }
 end
 
@@ -46,6 +47,12 @@ end
 function App:quit(key)
     if key == "escape" then
         love.event.quit()
+    end
+end
+
+function App:reset(key)
+    if key == "return" then
+        love.load()
     end
 end
 

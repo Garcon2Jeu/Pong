@@ -10,6 +10,10 @@ function Ball:init()
 end
 
 function Ball:update(dt)
+    if not gameState.play then
+        return
+    end
+
     self:move(dt)
 
     if App:hasCollided(self, paddle1) then
@@ -19,16 +23,11 @@ function Ball:update(dt)
     end
 
     self:bounceOffWalls()
+    self:score()
 end
 
 function Ball:draw()
     love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
-end
-
-function Ball:reset(key)
-    if key == "return" then
-        self:init()
-    end
 end
 
 function Ball:move(dt)
@@ -38,19 +37,45 @@ end
 
 function Ball:bounceOffPaddles(offset)
     self.x = offset
-    self.dx = -self.dx
+    self.dx = -self.dx * 1.3
     self.dy = self.dy < 0 and
         -math.random(10, 150)
         or
         math.random(10, 150)
+    sounds["paddle_hit"]:play()
 end
 
 function Ball:bounceOffWalls()
     if self.y < 0 then
         self.y = 0
         self.dy = -self.dy
+        sounds["wall_hit"]:play()
     elseif self.y + self.height > VIRTUAL_HEIGHT then
         self.y = VIRTUAL_HEIGHT - self.height
         self.dy = -self.dy
+        sounds["wall_hit"]:play()
     end
+end
+
+function Ball:score()
+    if self.x + self.width <= 0 then
+        paddle2.score = paddle2.score + 1
+        paddle1.serving = true
+        self:reset(100)
+        sounds["score"]:play()
+        gameState:setServe()
+    elseif self.x >= VIRTUAL_WIDTH then
+        paddle1.score = paddle1.score + 1
+        paddle2.serving = true
+        self:reset(-100)
+        sounds["score"]:play()
+        gameState:setServe()
+    end
+end
+
+function Ball:reset(dx)
+    self.x  = CENTER_WIDTH - 2
+    self.y  = CENTER_HEIGHT - 2
+    self.dx = dx
+    self.dy = math.random(-50, 50)
 end
