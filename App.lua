@@ -57,11 +57,13 @@ function App:reset(key)
 end
 
 function App:hasCollided(object1, object2)
-    if object1.x > object2.x + object2.width or object2.x > object1.x + object1.width then
+    if object1.x > object2.x + object2.width or
+        object2.x > object1.x + object1.width then
         return false
     end
 
-    if object1.y > object2.y + object2.height or object2.y > object1.y + object1.height then
+    if object1.y > object2.y + object2.height or
+        object2.y > object1.y + object1.height then
         return false
     end
 
