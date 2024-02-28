@@ -1,6 +1,6 @@
 ## Pong
 
-J'ai programmé ce jeu au cours de la premieère semaine de la formation GD50, centrée sur le dévelloppement de jeu-vidéo en utilisant le moteur Löve2D en utilisant le langage de programmation Lua.
+J'ai programmé ce jeu au cours de la première semaine de la formation GD50, centrée sur le dévelloppement de jeu-vidéo en utilisant le moteur Löve2D en utilisant le langage de programmation Lua.
 
 Les sujets abordés sont les suivants:
 - le language de programmation Lua
@@ -13,7 +13,8 @@ Les sujets abordés sont les suivants:
 - les effets sonores
 
 Pour y jouer, vous devez tout d'abord télécharger le moteur LÖVE2D disponible ci-dessous:
-
 https://love2d.org/#download
 
 Vous pouvez maintenant télécharger et lancer le fichier du jeu "Pong.love".
+
+<img src="pong_screenshot.png">
